@@ -4,13 +4,13 @@ import { db, Exercise } from '@/lib/db';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Search, Plus, Dumbbell } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Search, Dumbbell } from 'lucide-react';
+import { Navigation } from '@/components/Navigation';
+import { AddExerciseDialog } from '@/components/AddExerciseDialog';
 
 type CategoryFilter = 'All' | 'Push' | 'Pull' | 'Legs' | 'Core';
 
 const ExerciseLibrary = () => {
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('All');
   
@@ -26,32 +26,28 @@ const ExerciseLibrary = () => {
   const categories: CategoryFilter[] = ['All', 'Push', 'Pull', 'Legs', 'Core'];
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
-      <div className="max-w-6xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-foreground">Exercise Library</h1>
-          <Button variant="outline" onClick={() => navigate('/')}>
-            Back to Dashboard
-          </Button>
-        </div>
-
-        {/* Search and Add */}
-        <div className="flex gap-2">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search exercises..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
-            />
+    <>
+      <Navigation />
+      <div className="min-h-screen bg-background pt-20 p-4 md:p-8">
+        <div className="max-w-6xl mx-auto space-y-6">
+          {/* Header */}
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Exercise Library</h1>
           </div>
-          <Button>
-            <Plus className="mr-2 h-4 w-4" />
-            Add Exercise
-          </Button>
-        </div>
+
+          {/* Search and Add */}
+          <div className="flex gap-2">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Search exercises..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+            <AddExerciseDialog />
+          </div>
 
         {/* Category Filter */}
         <div className="flex gap-2 flex-wrap">
@@ -89,13 +85,14 @@ const ExerciseLibrary = () => {
           ))}
         </div>
 
-        {filteredExercises?.length === 0 && (
-          <Card className="p-8 text-center border-border/50">
-            <p className="text-muted-foreground">No exercises found.</p>
-          </Card>
-        )}
+          {filteredExercises?.length === 0 && (
+            <Card className="p-8 text-center border-border/50">
+              <p className="text-muted-foreground">No exercises found.</p>
+            </Card>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

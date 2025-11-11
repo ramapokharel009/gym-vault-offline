@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Activity, TrendingUp, Award, Calendar, Clock, Weight } from 'lucide-react';
 import { format } from 'date-fns';
+import { Navigation } from '@/components/Navigation';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -41,8 +42,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <>
+      <Navigation />
+      <div className="min-h-screen bg-background pt-20 p-4 md:p-8">
+        <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent">
@@ -165,7 +168,8 @@ const Dashboard = () => {
           </Card>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

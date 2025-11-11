@@ -6,10 +6,9 @@ import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Award, TrendingUp, Scale } from 'lucide-react';
 import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import { Navigation } from '@/components/Navigation';
 
 const Progress = () => {
-  const navigate = useNavigate();
   const personalRecords = useLiveQuery(() => db.personalRecords.orderBy('date').reverse().toArray());
   const bodyMetrics = useLiveQuery(() => db.bodyMetrics.orderBy('date').reverse().toArray());
   const exercises = useLiveQuery(() => db.exercises.toArray());
@@ -19,15 +18,14 @@ const Progress = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
-      <div className="max-w-6xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-foreground">Progress Tracking</h1>
-          <Button variant="outline" onClick={() => navigate('/')}>
-            Back to Dashboard
-          </Button>
-        </div>
+    <>
+      <Navigation />
+      <div className="min-h-screen bg-background pt-20 p-4 md:p-8">
+        <div className="max-w-6xl mx-auto space-y-6">
+          {/* Header */}
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Progress Tracking</h1>
+          </div>
 
         <Tabs defaultValue="prs" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
@@ -118,8 +116,9 @@ const Progress = () => {
             </Card>
           </TabsContent>
         </Tabs>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -6,12 +6,11 @@ import { Card } from '@/components/ui/card';
 import { StatCard } from '@/components/StatCard';
 import { Activity, Clock, Weight, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
 import { format, subDays, subWeeks, subMonths, subYears } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import { Navigation } from '@/components/Navigation';
 
 type FilterType = 'all' | 'week' | 'month' | 'year';
 
 const WorkoutHistory = () => {
-  const navigate = useNavigate();
   const [filter, setFilter] = useState<FilterType>('all');
   const [expandedWorkouts, setExpandedWorkouts] = useState<Set<number>>(new Set());
   
@@ -66,15 +65,14 @@ const WorkoutHistory = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
-      <div className="max-w-6xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-foreground">Workout History</h1>
-          <Button variant="outline" onClick={() => navigate('/')}>
-            Back to Dashboard
-          </Button>
-        </div>
+    <>
+      <Navigation />
+      <div className="min-h-screen bg-background pt-20 p-4 md:p-8">
+        <div className="max-w-6xl mx-auto space-y-6">
+          {/* Header */}
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Workout History</h1>
+          </div>
 
         {/* Filter Buttons */}
         <div className="flex gap-2 flex-wrap">
@@ -173,10 +171,11 @@ const WorkoutHistory = () => {
             <Card className="p-8 text-center border-border/50">
               <p className="text-muted-foreground">No workouts found for this time period.</p>
             </Card>
-          )}
+        )}
+        </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
