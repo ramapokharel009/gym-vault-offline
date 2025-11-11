@@ -20,7 +20,8 @@ const Progress = () => {
   return (
     <>
       <Navigation />
-      <div className="min-h-screen bg-background pt-20 p-4 md:p-8">
+      <div className="h-2" />
+      <div className="min-h-screen bg-background p-4 md:p-8">
         <div className="max-w-6xl mx-auto space-y-6">
           {/* Header */}
           <div>
