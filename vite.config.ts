@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: './',
+  base: '/gym-vault-offline/',
   server: {
     host: "::",
     port: 8080,
@@ -24,8 +24,8 @@ export default defineConfig(({ mode }) => ({
         theme_color: '#ea580c',
         background_color: '#1e293b',
         display: 'standalone',
-        scope: '/',
-        start_url: '/',
+        scope: '/gym-vault-offline/',
+        start_url: '/gym-vault-offline/',
         icons: [
           {
             src: 'icon-192.png',
